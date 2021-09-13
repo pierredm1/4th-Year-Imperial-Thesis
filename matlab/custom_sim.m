@@ -1,5 +1,5 @@
 clear,clc
-number_of_cycles = 2
+number_of_cycles = 1
 for i= 1:number_of_cycles
     % Define the parameters structure.
     
@@ -60,11 +60,11 @@ for i= 1:number_of_cycles
     B = round(beginning_SOC);
     %C = round(temp);
     name = sprintf(name_var, A);
-    path_directory = '../raw_data/Test/';
+    path_directory = 'raw_data/Test/';
     path = strcat(path_directory,name);
     % storing results as 
     a = [results(i).time{1}, results(i).Voltage{1}, results(i).curr_density, results(i).SOC{1}, results(i).SOC_estimated{1}, first_column_temp];
     T = array2table(a);
     T.Properties.VariableNames(1:6) = {'time','voltage','curr_density','SOC','SOC_est','temp'};
-    writetable(T, name)
+    writetable(T, path)
 end
