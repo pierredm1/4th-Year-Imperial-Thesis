@@ -1,5 +1,5 @@
 clear,clc
-number_of_cycles = 1
+number_of_cycles = 100;
 for i= 1:number_of_cycles
     % Define the parameters structure.
     
@@ -26,7 +26,7 @@ for i= 1:number_of_cycles
     initialState.YP     = [];
     % Set the initial integration time
     t0 	= 0;
-    tf  = 100;
+    tf  = 500;
     param{1}.OperatingMode     = 4;
 
     % See the getCarCurrent.m file in order to understand how the piecewise
@@ -42,7 +42,7 @@ for i= 1:number_of_cycles
     temp = randi([263,323],1,1);
     param{1}.T_init = temp;
     param{1}.Tref = temp;
-   
+    disp(i)
     % results are created 100 times and stores ni results(i)
     results(i) 	= startSimulation(t0,tf,initialState,[],param);
 end
