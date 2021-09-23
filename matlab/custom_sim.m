@@ -142,7 +142,7 @@ for i= 1:number_of_cycles
     B = round(beginning_SOC);
     %C = round(temp);
     name = sprintf(name_var, A);
-    path_directory = 'raw_data/Test/';
+    path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
     path = strcat(path_directory,name);
     % storing results as 
     a = [results(i).time{1}, results(i).Voltage{1}, results(i).curr_density, results(i).SOC{1}, results(i).SOC_estimated{1}, first_column_temp];
