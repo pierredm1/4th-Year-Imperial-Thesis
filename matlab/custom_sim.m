@@ -116,10 +116,10 @@ for i= 1:number_of_cycles
         t0 		= results.time{1}(end);
 
     end
-    OutCellXT = [Curr_dens';
-                 Volts_tot';
-                 Temperature_tot(:,end)';
-                 t_tot'];
+    OutCellXT = [Curr_dens',
+                 Volts_tot',
+                 Temperature_tot(:,end)',
+                 t_tot'],
     OutCellYT = [SOC_tot'];
     
     X_Train{end+1,1} = OutCellXT
@@ -145,7 +145,6 @@ for i= 1:number_of_cycles
     path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
     path = strcat(path_directory,name);
     % storing results as 
-    a = [results(i).time{1}, results(i).Voltage{1}, results(i).curr_density, results(i).SOC{1}, results(i).SOC_estimated{1}, first_column_temp];
     T = array2table(a);
     disp(path)
     T.Properties.VariableNames(1:6) = {'time','voltage','curr_density','SOC','SOC_est','temp'};
