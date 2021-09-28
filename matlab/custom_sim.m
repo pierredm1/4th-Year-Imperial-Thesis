@@ -1,7 +1,7 @@
 clear,clc
-number_of_cycles = 1;
-X_Train = {}
-Y_Train = {}
+number_of_cycles = 5;
+X_Train = {};
+Y_Train = {};
 for i= 1:number_of_cycles
     % Define the parameters structure.
     
@@ -42,7 +42,7 @@ for i= 1:number_of_cycles
     distT = truncate(dist,-6*OneC_density,3*OneC_density)
     input_currents = [];
     
-    for j = 1:20
+    for j = 1:1000
         input_currents(end+1,1) = random(distT)
     end
 
@@ -78,9 +78,9 @@ for i= 1:number_of_cycles
     % the ambient temperature is chosen at random between -10 and 50
     % degrees celsius
     % intial temperature of the cell ( do we want to change?)
-    temp = randi([263,323],1,1);
-    param{1}.T_init = temp;
-    param{1}.Tref = temp;
+    %temp = randi([263,323],1,1);
+    %param{1}.T_init = temp;
+    %param{1}.Tref = temp;
     
     % results are created 100 times and stores ni results(i)
     % results(i) 	= startSimulation(t0,tf,initialState,[],param);
@@ -125,9 +125,8 @@ for i= 1:number_of_cycles
     
     X_Train{end+1,1} = OutCellXT
     Y_Train{end+1,1} = OutCellYT
+    
 end
-
-
 
 
 for i= 1:number_of_cycles
@@ -141,7 +140,7 @@ for i= 1:number_of_cycles
     
     % generating .csv file name
     name_var = "results%d%d.csv";
-    A = i;
+    A = i+95;
     %B = round(beginning_SOC);
     %C = round(temp);
     name = sprintf(name_var, A);

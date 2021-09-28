@@ -1,7 +1,7 @@
 clear,clc
-number_of_cycles = 2;
-X_Train = {}
-Y_Train = {}
+number_of_cycles = 5;
+X_Train = {};
+Y_Train = {};
 for i= 1:number_of_cycles
     % Define the parameters structure.
     
@@ -42,7 +42,7 @@ for i= 1:number_of_cycles
     distT = truncate(dist,-6*OneC_density,3*OneC_density)
     input_currents = [];
     
-    for j = 1:100
+    for j = 1:20
         input_currents(end+1,1) = random(distT)
     end
 
@@ -78,9 +78,9 @@ for i= 1:number_of_cycles
     % the ambient temperature is chosen at random between -10 and 50
     % degrees celsius
     % intial temperature of the cell ( do we want to change?)
-    temp = randi([263,323],1,1);
-    param{1}.T_init = temp;
-    param{1}.Tref = temp;
+    %temp = randi([263,323],1,1);
+    %param{1}.T_init = temp;
+    %param{1}.Tref = temp;
     
     % results are created 100 times and stores ni results(i)
     % results(i) 	= startSimulation(t0,tf,initialState,[],param);
@@ -119,35 +119,53 @@ for i= 1:number_of_cycles
     OutCellXT = [Curr_dens',
                  Volts_tot',
                  Temperature_tot(:,end)',
-                 t_tot'],
+                 t_tot',
+                 SOC_tot'];
     OutCellYT = [SOC_tot'];
     
     X_Train{end+1,1} = OutCellXT
     Y_Train{end+1,1} = OutCellYT
-end
-
-
-
-
-for i= 1:number_of_cycles
-    %% for loop to output results to .csv
     
-    % input temperature to variable 
-    %temp = results(i).Temperature{1};
-    %first_column_temp = temp(:,1);
+    X_Train_mod = transpose(X_Train{i});
     
     % generating .csv file name
     name_var = "results%d%d.csv";
-    %A = i;
+    A = i+10;
     %B = round(beginning_SOC);
     %C = round(temp);
-    %name = sprintf(name_var, A);
-    %path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
-    %path = strcat(path_directory,name);
+    name = sprintf(name_var, A);
+    path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
+    path = strcat(path_directory,name);
     % storing results as 
     
-    T = array2table(a);
-    disp(path)
-    T.Properties.VariableNames(1:6) = {'time','voltage','curr_density','SOC','SOC_est','temp'};
+    T = array2table(X_Train_mod);
+    %disp(path)
+    T.Properties.VariableNames(1:5) = {'curr_dens','Volts_tot','Temp_tot','t_tot','SOC_tot'};
     writetable(T, path)
 end
+
+
+% for i= 1:number_of_cycles
+%     %% for loop to output results to .csv
+%     
+%     % input temperature to variable 
+%     %temp = results(i).Temperature{1};
+%     %first_column_temp = temp(:,1);
+%     
+%     X_Train_mod = transpose(X_Train{i});
+%     
+%     % generating .csv file name
+%     name_var = "results%d%d.csv";
+%     A = i+10;
+%     %B = round(beginning_SOC);
+%     %C = round(temp);
+%     name = sprintf(name_var, A);
+%     path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
+%     path = strcat(path_directory,name);
+%     % storing results as 
+%     
+%     T = array2table(X_Train_mod);
+%     %disp(path)
+%     T.Properties.VariableNames(1:5) = {'curr_dens','Volts_tot','Temp_tot','t_tot','SOC_tot'};
+%     writetable(T, path)
+% end
