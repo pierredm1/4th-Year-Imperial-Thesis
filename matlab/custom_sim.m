@@ -140,7 +140,7 @@ for i= 1:number_of_cycles
     
     % generating .csv file name
     name_var = "results%d%d.csv";
-    A = i+75;
+    A = i+95;
     %B = round(beginning_SOC);
     %C = round(temp);
     name = sprintf(name_var, A);
