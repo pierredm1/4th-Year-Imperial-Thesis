@@ -50,10 +50,10 @@ for i= 1:number_of_cycles
     len = length(input_currents);
 %     intervals from 0.5s to 5s
 %     intervalsarray = [1,2,3,4,5];
-    intervalsarray = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
+    intervalsarray = [0.5];
     timeinterval = [];
     for l=1:len
-        index = randperm(10,1);
+        index = randperm(1,1);
         timeinterval(1,end+1) = intervalsarray(1, index);
     end
 
@@ -139,12 +139,12 @@ for i= 1:number_of_cycles
     X_Train_mod = transpose(X_Train{i});
     
     % generating .csv file name
-    name_var = "results%d%d.csv";
+    name_var = "v2_results%d%d.csv";
     A = i+95;
     %B = round(beginning_SOC);
     %C = round(temp);
     name = sprintf(name_var, A);
-    path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test\";
+    path_directory = "C:\Users\Pierre de Metz\Documents\GitHub\thesis\raw_data\Test2\";
     path = strcat(path_directory,name);
     % storing results as 
     
