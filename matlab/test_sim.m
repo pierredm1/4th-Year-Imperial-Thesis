@@ -1,9 +1,11 @@
 clear,clc
 
-data=load('C:\Users\Pierre de Metz\Desktop\test_v1_mat_dst.mat')
-time = data.time
-current_real = data.current_real
+data=load('C:\Users\Pierre de Metz\Desktop\test_v1_mat_dst.mat');
+time = data.time;
+current_real = data.current_real;
 number_of_cycles = 1;
+X_Train = {};
+Y_Train = {};
 for i= 1:number_of_cycles
     % Define the parameters structure.
     
@@ -40,15 +42,15 @@ for i= 1:number_of_cycles
    
     meanDist = -8.4295;
     stdDist = 21.6473;
-    dist = makedist('Normal','mu',-8.4295,'sigma',21.6473)
-    distT = truncate(dist,-6*OneC_density,3*OneC_density)
+    dist = makedist('Normal','mu',-8.4295,'sigma',21.6473);
+    distT = truncate(dist,-6*OneC_density,3*OneC_density);
 %     intervalsarray = [-1];
-    input_currents =-current_real;
-%     for j = 1:5000
+    input_currents = -current_real.*OneC_density;
+%     for j = 1:length(current_real)
 %         index = randperm(1,1);
 %         input_currents(1,end+1) = intervalsarray(1, index).*OneC_density;
 %     end
-    class(input_currents)
+    class(input_currents);
     %len is number of time intervals
     len = length(input_currents);
 %     intervals from 0.5s to 5s
@@ -89,10 +91,12 @@ for i= 1:number_of_cycles
     
     % results are created 100 times and stores ni results(i)
     % results(i) 	= startSimulation(t0,tf,initialState,[],param);
-    run_n =1
+    run_n =1;
     for i=1:length(timeinterval)
         % Set the final integration time
-        tf 			= tf + timeinterval(i);
+%       tf 			= tf + timeinterval(i);
+        tf 			= tf + 0.5;
+      
         % Start the simulations
         results 	= startSimulation(t0,tf,initialState,input_currents(i),param);
         % Concatenate the results
